@@ -40,6 +40,8 @@
 #include "ceres/ceres.h"
 #include "ceres/rotation.h"
 
+using namespace std;
+
 // Read a Bundle Adjustment in the Large dataset.
 class BALProblem {
 public:
@@ -112,6 +114,9 @@ struct SnavelyReprojectionError {
 	bool operator()(const T* const camera,
 		const T* const point,
 		T* residuals) const {
+		cout << "camera_r: " << camera[0] << ", " << camera[1] << ", " << camera[2] << endl;
+		cout << "camera_t: " << camera[3] << ", " << camera[4] << ", " << camera[5] << endl;
+		cout << "point: " << point[0] << ", " << point[1] << ", " << point[2] << endl;
 		// camera[0,1,2] are the angle-axis rotation.
 		T p[3];
 		ceres::AngleAxisRotatePoint(camera, point, p);
